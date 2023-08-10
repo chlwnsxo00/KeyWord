@@ -17,10 +17,12 @@
         app:layout_constraintTop_toTopOf="parent"
         android:src="@drawable/keyword"
         tools:layout_editor_absoluteX="78dp"
-        tools:layout_editor_absoluteY="251dp" />
+        tools:layout_editor_absoluteY="251dp"
+        android:elevation="10dp"/>
 
     <TextView
         android:id="@+id/text"
+        android:elevation="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
