@@ -28,7 +28,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         android:layout_marginTop="20dp"
         android:text="Key Word"
-        android:fontFamily="@font/i_am_a_player"
+        android:fontFamily="@font/gangwon"
         android:textColor="@color/white"
         android:textSize="45dp"/>
 

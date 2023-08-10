@@ -1,12 +1,10 @@
-package com.example.blank
+package com.example.keyword
 
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import androidx.appcompat.app.AppCompatActivity
-import com.example.keyword.MainActivity
-import com.example.keyword.R
-
+import android.util.Log
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,5 +21,4 @@ class SplashActivity : AppCompatActivity() {
             finish()
         }, splashTime)
     }
-
 }

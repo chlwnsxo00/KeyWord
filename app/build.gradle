@@ -4,12 +4,12 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.keyword"
         minSdk 23
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -40,4 +40,28 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    //neumorphism
+    implementation 'com.github.fornewid:neumorphism:0.3.2'
+
+    //Ksoup 의존성
+    implementation "com.github.fcannizzaro:ksoup:1.0.4"
+    implementation 'org.jsoup:jsoup:1.15.3'
+
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    
+    //glide
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
+
+    //Circle image
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    //Power Menu
+    implementation "com.github.skydoves:powermenu:2.2.4"
+
+    //Material Menu
+    implementation 'com.balysv.materialmenu:material-menu:2.0.0'
+
 }
