@@ -1,31 +1,34 @@
 package com.example.keyword
 
-import android.graphics.Color
-import android.graphics.Typeface
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
-import android.view.View
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.drawerlayout.widget.DrawerLayout
+import androidx.appcompat.resources.Compatibility.Api21Impl.inflate
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.balysv.materialmenu.MaterialMenuDrawable
 import com.example.keyword.adapter.NewsAdapter
 import com.example.keyword.adapter.itemAdapter
 import com.example.keyword.data.Items
 import com.example.keyword.data.News
-import com.skydoves.powermenu.MenuAnimation
-import com.skydoves.powermenu.OnMenuItemClickListener
+import com.example.keyword.databinding.ActivityMainBinding
 import com.skydoves.powermenu.PowerMenu
-import com.skydoves.powermenu.PowerMenuItem
+import com.skydoves.powermenu.databinding.ItemPowerMenuLibrarySkydovesBinding.inflate
+import com.skydoves.powermenu.databinding.LayoutPowerBackgroundLibrarySkydovesBinding.inflate
+import com.skydoves.powermenu.databinding.LayoutPowerMenuLibrarySkydovesBinding.inflate
+import com.skydoves.powermenu.kotlin.powerMenu
+import kotlinx.coroutines.*
 import org.jsoup.Jsoup
 import org.jsoup.select.Elements
+import java.lang.Runnable
 
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var powerMenu: PowerMenu
+    private val moreMenu by powerMenu<MoreMenuFactory>()
     private var itemList = ArrayList<Items>()
     private var newsList = ArrayList<News>()
     private val newsRecyclerView: RecyclerView by lazy {
@@ -36,67 +39,54 @@ class MainActivity : AppCompatActivity() {
     }
     private lateinit var keywordAdapter: itemAdapter
     private lateinit var newsadApter: NewsAdapter
-    private val drawerLayout: DrawerLayout? = null
-    private var isDrawerOpened = false
-    private val materialMenu: MaterialMenuDrawable? = null
-
-    private val onMenuItemClickListener = OnMenuItemClickListener<PowerMenuItem> { position, item ->
-        // 아이템 클릭 시 수행할 동작을 정의합니다.
-        // 예: 아이템 이름을 출력하거나 해당 아이템에 맞는 동작을 수행합니다.
-        Toast.makeText(this@MainActivity, "Clicked: ${item.title}", Toast.LENGTH_SHORT).show()
-        powerMenu.dismiss()
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        initPowerMenu()
         getKeyword()
         NewsCrawling()
-        initPowerMenu()
-        initMaterialMenu()
     }
 
 
     private fun initPowerMenu() {
-        powerMenu = PowerMenu.Builder(this)
-            .addItem(PowerMenuItem("정치", false))
-            .addItem(PowerMenuItem("경제", false))
-            .addItem(PowerMenuItem("사회", false))
-            .addItem(PowerMenuItem("생활/문화", false))
-            .addItem(PowerMenuItem("IT/과학", false))
-            .addItem(PowerMenuItem("세계", false))
-            .setAnimation(MenuAnimation.SHOWUP_TOP_LEFT)
-            .setMenuRadius(10f)
-            .setMenuShadow(10f)
-            .setTextColor(getColor(R.color.black))
-            .setTextGravity(Gravity.CENTER)
-            .setTextTypeface(Typeface.DEFAULT_BOLD)
-            .setSelectedTextColor(getColor(R.color.blue))
-            .setMenuColor(Color.WHITE)
-            .setSelectedMenuColor(getColor(R.color.blue))
-            .setOnMenuItemClickListener(onMenuItemClickListener)
-            .build()
+        val binding = ActivityMainBinding.inflate(layoutInflater)
+        val rootView = binding.root
+        setContentView(rootView)
+    }
 
-        yourView.setOnClickListener {
-            powerMenu.showAsDropDown(it)
+    // 이 액티비티와 top_menu_main_index를 연결
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.top_menu, menu)
+        //R은 res 폴더의 약자. res폴더 안에 있는 context_menu_main.xml 파일과 연결시킨다.
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    // 상단 메뉴 item 선택시 이벤트
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.dehaze -> {
+                moreMenu.showAsDropDown(item.actionView)
+                moreMenu.setOnMenuItemClickListener { position, item ->
+                    moreMenu.selectedPosition = position
+                }
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
-
     }
 
     private fun getKeyword() {
-        //TODO("keyword 받아 오기")
         itemList.add(Items("keyword1"))
         itemList.add(Items("keyword2"))
         itemList.add(Items("keyword3"))
         itemList.add(Items("keyword4"))
         itemList.add(Items("keyword5"))
-        itemList.add(Items("keyword5"))
-        itemList.add(Items("keyword5"))
-        itemList.add(Items("keyword5"))
-        itemList.add(Items("keyword5"))
-        itemList.add(Items("keyword5"))
-        itemList.add(Items("keyword5"))
-        itemList.add(Items("keyword5"))
+        itemList.add(Items("keyword6"))
+        itemList.add(Items("keyword7"))
+        itemList.add(Items("keyword8"))
+        itemList.add(Items("keyword9"))
+        itemList.add(Items("keyword10"))
 
         initKeywordRecyclerView(itemList)
     }

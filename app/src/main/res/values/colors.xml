@@ -9,7 +9,7 @@
     <color name="white">#FFFFFFFF</color>
 
 
-    <color name="gray">#F0F0F0</color>
+    <color name="gray">#FDFDFD</color>
     <color name="grayButton">#f2f2f2</color>
     <color name="pressGrayButton">#e2e2e2</color>
     <color name="blue">#3F51B5</color>
