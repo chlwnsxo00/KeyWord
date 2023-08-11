@@ -3,32 +3,35 @@ package com.example.keyword
 import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.EditText
-import android.widget.Toast
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toolbar
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.resources.Compatibility.Api21Impl.inflate
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.keyword.adapter.NewsAdapter
 import com.example.keyword.adapter.itemAdapter
 import com.example.keyword.data.Items
 import com.example.keyword.data.News
-import com.example.keyword.databinding.ActivityMainBinding
-import com.skydoves.powermenu.PowerMenu
-import com.skydoves.powermenu.databinding.ItemPowerMenuLibrarySkydovesBinding.inflate
-import com.skydoves.powermenu.databinding.LayoutPowerBackgroundLibrarySkydovesBinding.inflate
-import com.skydoves.powermenu.databinding.LayoutPowerMenuLibrarySkydovesBinding.inflate
-import com.skydoves.powermenu.kotlin.powerMenu
-import kotlinx.coroutines.*
+import com.google.android.material.navigation.NavigationView
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.jsoup.Jsoup
 import org.jsoup.select.Elements
-import java.lang.Runnable
 
 
-class MainActivity : AppCompatActivity() {
-    private val moreMenu by powerMenu<MoreMenuFactory>()
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+    private var sid = 102
     private var itemList = ArrayList<Items>()
     private var newsList = ArrayList<News>()
     private val newsRecyclerView: RecyclerView by lazy {
@@ -40,41 +43,40 @@ class MainActivity : AppCompatActivity() {
     private lateinit var keywordAdapter: itemAdapter
     private lateinit var newsadApter: NewsAdapter
 
+    private val ivMenu: ImageView by lazy {
+        findViewById(R.id.iv_menu)
+    }
+    private val drawerLayout: DrawerLayout by lazy {
+        findViewById(R.id.drawer)
+    }
+    private val toolbar: androidx.appcompat.widget.Toolbar by lazy {
+        findViewById(R.id.toolbar)
+    }
+    private val now: TextView by lazy {
+        findViewById(R.id.now)
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        initPowerMenu()
         getKeyword()
-        NewsCrawling()
+        NewsCrawling(sid)
+        initList()
+
+        val navigationView: NavigationView = findViewById(R.id.navigation)
+        navigationView.setNavigationItemSelectedListener(this)
     }
 
+    private fun initList() {
+        //액션바 변경하기(들어갈 수 있는 타입 : Toolbar type
+        setSupportActionBar(toolbar)
 
-    private fun initPowerMenu() {
-        val binding = ActivityMainBinding.inflate(layoutInflater)
-        val rootView = binding.root
-        setContentView(rootView)
-    }
-
-    // 이 액티비티와 top_menu_main_index를 연결
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.top_menu, menu)
-        //R은 res 폴더의 약자. res폴더 안에 있는 context_menu_main.xml 파일과 연결시킨다.
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    // 상단 메뉴 item 선택시 이벤트
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.dehaze -> {
-                moreMenu.showAsDropDown(item.actionView)
-                moreMenu.setOnMenuItemClickListener { position, item ->
-                    moreMenu.selectedPosition = position
-                }
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
+        ivMenu.setOnClickListener {
+            drawerLayout.openDrawer(Gravity.LEFT)
         }
     }
+
 
     private fun getKeyword() {
         itemList.add(Items("keyword1"))
@@ -91,10 +93,11 @@ class MainActivity : AppCompatActivity() {
         initKeywordRecyclerView(itemList)
     }
 
-    private fun NewsCrawling() {
+    private fun NewsCrawling(sid: Int) {
         Thread(Runnable {
+            newsList.clear()
             val doc =
-                Jsoup.connect("https://news.naver.com/main/main.naver?mode=LSD&mid=shm&sid1=102")
+                Jsoup.connect("https://news.naver.com/main/main.naver?mode=LSD&mid=shm&sid1=$sid")
                     .userAgent("Chrome").get()
             var elements: Elements = doc.select(".sh_item._cluster_content")
             // mobile-padding 클래스의 board-list의 id를 가진 것들을 elements 객체에 저장
@@ -136,5 +139,42 @@ class MainActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         keywordAdapter = itemAdapter(itemList)
         keywordRecyclerView.adapter = keywordAdapter
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.politic -> {
+                NewsCrawling(100)
+                now.text = "정치"
+                true
+            }
+            R.id.economic -> {
+                NewsCrawling(101)
+                now.text = "경제"
+                true
+            }
+            R.id.society -> {
+                NewsCrawling(102)
+                now.text = "사회"
+                true
+            }
+            R.id.life -> {
+                NewsCrawling(103)
+                now.text = "생활/문화"
+                true
+            }
+            R.id.IT -> {
+                NewsCrawling(104)
+                now.text = "IT/과학"
+                true
+            }
+            R.id.world -> {
+                NewsCrawling(105)
+                now.text = "세계"
+                true
+            }
+        }
+        drawerLayout.closeDrawer(GravityCompat.START)
+        return true
     }
 }

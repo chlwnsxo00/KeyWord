@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/politic"
+        android:icon="@drawable/politic"
+        android:title="정치"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/economic"
+        android:icon="@drawable/economic"
+        android:title="경제"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/society"
+        android:icon="@drawable/society"
+        android:title="사회"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/life"
+        android:icon="@drawable/life"
+        android:title="생활/문화"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/IT"
+        android:icon="@drawable/science"
+        android:title="IT/과학"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/world"
+        android:icon="@drawable/world"
+        android:title="세계"
+        app:showAsAction="ifRoom" />
+</menu>
