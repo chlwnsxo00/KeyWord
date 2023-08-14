@@ -1,12 +1,12 @@
-package com.example.keyword
+package com.example.keyword.Activities
 
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.MenuItem
 import android.webkit.WebView
-import android.widget.Toolbar
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import com.example.keyword.R
 
 
 class ArticleActivity : AppCompatActivity() {
