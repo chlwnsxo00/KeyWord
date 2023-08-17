@@ -1,6 +1,9 @@
 package com.example.keyword.`interface`
 
+import android.view.View
+
 interface KeywordClick {
-    fun OnKeywordClick(keyword: String?)
-    fun OnLongKeywordClick(keyword: String?)
+    fun OnKeywordSelected(keyword: String)
+    fun OnKeywordUnselected()
+    fun OnLongKeywordClick(keyword: String, itemView: View)
 }

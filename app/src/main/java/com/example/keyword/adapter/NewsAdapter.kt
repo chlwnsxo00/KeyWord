@@ -40,7 +40,6 @@ class NewsAdapter(val itemlist: ArrayList<News> ,val listener : NewsClick) :
                     Jsoup.connect(item.address)
                         .userAgent("Chrome").get()
                 body = doc.select(".newsct_article._article_body").text()
-
                 listener.NewsClick(item.address,item.title,item.press,body,item.cover)
             }).start()
         }

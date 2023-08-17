@@ -15,6 +15,7 @@ android {
         versionCode 1
         versionName "1.0"
 
+        vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
@@ -59,12 +60,14 @@ dependencies {
     //Circle image
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
-    //Power Menu
-    implementation "com.github.skydoves:powermenu:2.2.4"
-
     //Material Menu
     implementation 'com.balysv.materialmenu:material-menu:2.0.0'
 
     //RefreshLayout
     implementation 'in.srain.cube:ultra-ptr:1.0.11'
+
+    //Balloon
+    implementation "com.github.skydoves:balloon:1.5.4"
+
+    implementation "com.pnikosis:materialish-progress:1.7"
 }
