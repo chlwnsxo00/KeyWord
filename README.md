@@ -9,10 +9,6 @@ https://github.com/chlwnsxo00/KeyWord/assets/31373739/85df5183-d90d-43f5-88a2-9f
 
 https://github.com/chlwnsxo00/KeyWord/assets/31373739/a6661722-b039-4f80-ab44-7d604fbc023c
 
-https://github.com/chlwnsxo00/KeyWord/assets/31373739/781d8722-bb33-46cd-a684-7c80d06b4cbb
-
-https://github.com/chlwnsxo00/KeyWord/assets/31373739/9f5bf6b5-2bb6-4755-bdee-0ec3e8ca0713
-
 ## 설명
 
 7가지의 테마별 키워드를 추출해 간편하게 각 테마별 이슈를 확인할 수 있는 서비스
