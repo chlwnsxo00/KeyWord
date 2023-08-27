@@ -5,8 +5,11 @@
 ![KakaoTalk_20230818_181829333 (1)](https://github.com/chlwnsxo00/KeyWord/assets/31373739/5e9023a3-068b-4758-9f8e-24dcaeeedff9)
 
 팀원 :
+
 최준태 - 안드로이드
+
 김우영 - Spring
+
 정동구 - React
 
 ## 설명
@@ -26,6 +29,7 @@
 <img width="749" alt="image" src="https://github.com/chlwnsxo00/KeyWord/assets/31373739/bbc3d065-edc8-474b-b46a-74e81f3a1fcc">
 
 https://github.com/chlwnsxo00/KeyWord/assets/31373739/85df5183-d90d-43f5-88a2-9f119ea89868
+
 https://github.com/chlwnsxo00/KeyWord/assets/31373739/a6661722-b039-4f80-ab44-7d604fbc023c
 
 
